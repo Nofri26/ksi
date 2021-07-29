@@ -60,7 +60,7 @@ if (!isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == false) {
                     <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
                     <div class="input-group-append">
                         <button class="btn btn-navbar" type="submit">
-                            <i class="fas fa-search"></i>
+                            <i class="fas fa-hamburger"></i>
                         </button>
                     </div>
                 </div>
@@ -189,6 +189,7 @@ if (!isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == false) {
                with font-awesome or any other icon font library -->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
+                                <!-- <i class="nav-icon fas fa-tachometer-alt"></i> -->
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard

@@ -18,6 +18,9 @@ require('connection.php'); ?>
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="Assets/LandingPage/css/styles.css" rel="stylesheet" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 
 <body id="page-top">
@@ -33,7 +36,7 @@ require('connection.php'); ?>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio">Data Barang</a></li>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">Transaksi</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#contact">Contact</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#contact">Guest Book</a></li>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="login.php">Login</a></li>
                 </ul>
             </div>
@@ -69,7 +72,13 @@ require('connection.php'); ?>
             </div>
             <!-- Portfolio Grid Items-->
             <div class="row justify-content-center">
-                <table class="table">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Masukkan keywrods" aria-label="Masukkan keywords" aria-describedby="button-addon2" id="search-criteria" name="search-criteria">
+                    <!-- <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="btn-search" name="btn-search">Button</button>
+                    </div> -->
+                </div>
+                <table class="table" id="tabel-barang">
                     <thead>
                         <tr>
                             <th scope="col">No</th>
@@ -103,6 +112,32 @@ require('connection.php'); ?>
             </div>
         </div>
     </section>
+    <script>
+        $("#search-criteria").on("keyup", function() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("search-criteria").value;
+            console.log(input)
+            // Declare variables
+
+            // input = document.getElementById("myInput");
+            filter = input.toUpperCase();
+            table = document.getElementById("tabel-barang");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        })
+    </script>
     <!-- About Section-->
     <section class="page-section bg-primary text-white mb-0" id="about">
         <div class="container">
@@ -116,7 +151,13 @@ require('connection.php'); ?>
             </div>
             <!-- About Section Content-->
             <div class="row">
-                <table class="table">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Masukkan keywrods" aria-label="Masukkan keywords" aria-describedby="button-addon2" id="search-criteria2" name="search-criteria2">
+                    <!-- <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="btn-search" name="btn-search">Button</button>
+                    </div> -->
+                </div>
+                <table class="table" id="tabel-transaksi">
                     <thead>
                         <tr>
                             <th scope="col">No</th>
@@ -150,11 +191,37 @@ require('connection.php'); ?>
             </div>
         </div>
     </section>
+    <script>
+        $("#search-criteria2").on("keyup", function() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("search-criteria2").value;
+            console.log(input)
+            // Declare variables
+
+            // input = document.getElementById("myInput");
+            filter = input.toUpperCase();
+            table = document.getElementById("tabel-transaksi");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        })
+    </script>
     <!-- Contact Section-->
     <section class="page-section" id="contact">
         <div class="container">
             <!-- Contact Section Heading-->
-            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Contact Me</h2>
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Guest Book</h2>
             <!-- Icon Divider-->
             <div class="divider-custom">
                 <div class="divider-custom-line"></div>
@@ -164,66 +231,72 @@ require('connection.php'); ?>
             <!-- Contact Section Form-->
             <div class="row justify-content-center">
                 <div class="col-lg-8 col-xl-7">
-                    <!-- * * * * * * * * * * * * * * *-->
-                    <!-- * * SB Forms Contact Form * *-->
-                    <!-- * * * * * * * * * * * * * * *-->
-                    <!-- This form is pre-integrated with SB Forms.-->
-                    <!-- To make this form functional, sign up at-->
-                    <!-- https://startbootstrap.com/solution/contact-forms-->
-                    <!-- to get an API token!-->
-                    <form id="contactForm" data-sb-form-api-token="API_TOKEN">
-                        <!-- Name input-->
-                        <div class="form-floating mb-3">
-                            <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
-                            <label for="name">Full name</label>
-                            <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                    <form method="POST" action="control/progressaddguestbook.php">
+                        <div class="form-group">
+                            <label for="fullname">Fullname</label>
+                            <input type="text" class="form-control" id="fullname" name="fullname" aria-describedby="emailHelp" required>
                         </div>
-                        <!-- Email address input-->
-                        <div class="form-floating mb-3">
-                            <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
-                            <label for="email">Email address</label>
-                            <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                            <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
                         </div>
-                        <!-- Phone number input-->
-                        <div class="form-floating mb-3">
-                            <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />
-                            <label for="phone">Phone number</label>
-                            <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                        <div class="form-group">
+                            <label for="email">Message</label>
+                            <textarea class="form-control" id="message" name="message" rows="3" required></textarea>
                         </div>
-                        <!-- Message input-->
-                        <div class="form-floating mb-3">
-                            <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
-                            <label for="message">Message</label>
-                            <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
-                        </div>
-                        <!-- Submit success message-->
-                        <!---->
-                        <!-- This is what your users will see when the form-->
-                        <!-- has successfully submitted-->
-                        <div class="d-none" id="submitSuccessMessage">
-                            <div class="text-center mb-3">
-                                <div class="fw-bolder">Form submission successful!</div>
-                                To activate this form, sign up at
-                                <br />
-                                <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                            </div>
-                        </div>
-                        <!-- Submit error message-->
-                        <!---->
-                        <!-- This is what your users will see when there is-->
-                        <!-- an error submitting the form-->
-                        <div class="d-none" id="submitErrorMessage">
-                            <div class="text-center text-danger mb-3">Error sending message!</div>
-                        </div>
-                        <!-- Submit Button-->
-                        <button class="btn btn-primary btn-xl disabled" id="submitButton" type="submit">Send</button>
+                        <br>
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
             </div>
         </div>
     </section>
     <!-- Footer-->
+
+    <!-- About Section-->
+    <section class="page-section bg-primary text-white mb-0" id="guest">
+        <div class="container">
+            <!-- About Section Heading-->
+            <h2 class="page-section-heading text-center text-uppercase text-white">Guest Book</h2>
+            <!-- Icon Divider-->
+            <div class="divider-custom divider-light">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <!-- About Section Content-->
+            <div class="row">
+                <p>haha</p>
+                <div class="row">
+
+                    <?php
+                    $result = mysqli_query($connect, "SELECT * FROM guest");
+                    $i = 1;
+                    foreach ($result as $row) :
+
+                    ?>
+                        <div class="col-sm-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title" style="color: black;"><?= $row['fullname']; ?></h5>
+                                    <p class="card-text" style="color: black;"><?= $row['message']; ?></p>
+                                    <a href="#" class="btn btn-primary"><?= $row['email']; ?></a>
+                                </div>
+                            </div>
+                        </div>
+
+                    <?php
+                        $i++;
+                    endforeach;
+                    ?>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
     <footer class="footer text-center">
         <div class="container">
             <div class="row">
